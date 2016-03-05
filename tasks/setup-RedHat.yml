@@ -5,3 +5,7 @@
     state: installed
     enablerepo: "{{ apache_enablerepo }}"
   with_items: "{{ apache_packages }}"
+
+- name: Remove default ssl.conf
+  file: name=/etc/httpd/conf.d/ssl.conf state=absent
+  when: apache_listen_port_ssl != 443
